@@ -13,3 +13,15 @@ Here's the directory where the bulletin would show up:
     Blessed to Be a Blessing 112215 4x3 ppt.pptx    bulletin 111515 pdf.pdf
     Blessed to Share Christ 112915 16x9 ppt.pptx    bulletin 112215 pdf.pdf
     Blessed to Share Christ 112915 4x3 ppt.pptx     bulletin 112915 pdf.pdf
+
+Since Clover doesn't have an API, and since Dropbox can hit webhooks, I think I'll set up a web app with these endpoints:
+
+* admin, for setting up the Dropbox integration
+* dropbox webhook, for receiving information about new files
+* landing pages from clover
+  * current bulletin
+  * old bulletins
+  * current sermon
+  * old sermons
+
+If I do the sermon stuff, there will need to be a thing that parses clover's list of sermons.
