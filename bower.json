@@ -1,0 +1,19 @@
+{
+  "name": "ccc-sync",
+  "description": "Ideally, this will work like this:",
+  "main": "index.js",
+  "authors": [
+    "Matt Burke <spraints@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
