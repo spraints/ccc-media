@@ -35,8 +35,7 @@ group :development, :test do
   # Use rspec for automated tests, if I write any.
   gem 'rspec-rails'
 
-  gem 'dotenv'
-  gem 'foreman'
+  gem 'dotenv-rails'
 end
 
 group :development do
