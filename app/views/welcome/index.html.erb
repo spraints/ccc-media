@@ -7,6 +7,10 @@
     <a href="/auth/dropbox_oauth2">Log in with dropbox</a><br/>
     <a href="/reset">reset</a><br/>
 
+    <div><% @users.each do |user| %>
+      <div><%= user.uid %> <%= user.email %></div>
+    <% end %></div>
+
     <%= debug session.to_hash %>
   </body>
 </html>
