@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get "auth/:provider/callback" => "welcome#callback"
   get "reset" => "welcome#reset"
 
+  get "dropbox/event" => "dropbox/webhooks#verify"
+  post "dropbox/event" => "dropbox/webhooks#receive"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
