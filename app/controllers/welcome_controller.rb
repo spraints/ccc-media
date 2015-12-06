@@ -5,14 +5,9 @@ class WelcomeController < ApplicationController
   end
 
   def callback
-#    session[:callback_keys] = env.keys
-    session[:params] = params.to_hash
-    session[:omniauth] = {
-#      "omniauth.strategy" => env["omniauth.strategy"].inspect,
-#      "omniauth.origin"   => env["omniauth.origin"].inspect,
-#      "omniauth.params"   => env["omniauth.params"].inspect,
-      "omniauth.auth"     => env["omniauth.auth"].to_hash,
-    }
+    if dbu = Tasks::Authenticate.new.perform(env["omniauth.auth"])
+      session[:db_uid] = dbu.uid
+    end
     redirect_to :action => :index
   end
 end
