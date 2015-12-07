@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   # Redirect to the current bulletin
   get "bulletins/current" => "bulletins#show"
 
+  # A player for the most recent sermon
+  get "sermons" => "sermons#show"
+  # A player for an older sermon
+  get "sermons/:year/:month/:day" => "sermons#show"
+
+
   # Dropbox's webhooks (https://www.dropbox.com/developers/reference/webhooks)
   get "dropbox/event" => "dropbox/webhooks#verify"
   post "dropbox/event" => "dropbox/webhooks#receive"
