@@ -8,7 +8,7 @@
     <a href="/reset">reset</a><br/>
 
     <div><% @users.each do |user| %>
-      <div><%= user.uid %> <%= user.email %><%= link_to scan_path(user.uid) %></div>
+      <div><%= user.uid %> <%= user.email %> <%= link_to "scan", scan_path(user.uid) %></div>
     <% end %></div>
 
     <%= debug session.to_hash %>
