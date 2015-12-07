@@ -8,6 +8,11 @@ class WelcomeController < ApplicationController
       end
   end
 
+  def temp_scan
+    uid = params[:uid].to_s
+    @results = Tasks::ListBulletins.new.perform(uid)
+  end
+
   def reset
     session.destroy
     redirect_to :action => :index

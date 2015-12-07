@@ -5,7 +5,7 @@ module Tasks
       email = auth_hash.info.email
       token = auth_hash.credentials.token
 
-      dbu = DropboxUser.where(:uid => uid).first_or_initialize
+      dbu = DropboxUser.for_uid(uid).first_or_initialize
       dbu.email = email
       dbu.token = token
       dbu.save!
