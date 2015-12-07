@@ -7,4 +7,8 @@ class DropboxFile < ActiveRecord::Base
   def self.at_path(path)
     where(:path => path).first_or_initialize
   end
+
+  def self.current
+    where("date < ?", Date.today + 1).order("date DESC").first
+  end
 end

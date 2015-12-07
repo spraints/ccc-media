@@ -1,0 +1,7 @@
+<% page_title "Bulletins" %>
+
+<% @bulletins.each do |bulletin| %>
+  <div>
+    <a href="<%= bulletin.public_url %>"><%= bulletin.date %></a>
+  </div>
+<% end %>

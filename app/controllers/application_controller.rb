@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_admin
-    redirect_to "/" unless admin?
+    redirect_to admin_login_path unless admin?
   end
 end
