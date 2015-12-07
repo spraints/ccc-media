@@ -23,7 +23,7 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'dropbox-sdk'
+gem 'dropbox-sdk', :require => 'dropbox_sdk'
 gem 'omniauth-dropbox-oauth2'
 
 group :development, :test do
