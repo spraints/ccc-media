@@ -11,10 +11,21 @@ module Tasks
         if meta["is_dir"]
           find_bulletins(client, meta["path"], result)
         elsif File.basename(meta["path"]) =~ /^bulletin/
-          result << meta
+          result.push info(client, meta)
         end
       end
       result
+    end
+
+    def info(client, meta)
+      info = {}
+      info[:name] = File.basename(meta["path"])
+      info[:date] =
+        if info[:name] =~ /(\d\d)(\d\d)(\d\d)/
+          Date $3.to_i + 2000, $1.to_i, $2.to_i
+        end
+      info[:url] = client.shares(meta["path"]).fetch("url")
+      info
     end
   end
 end
