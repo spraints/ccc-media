@@ -22,7 +22,7 @@ module Tasks
       info[:name] = File.basename(meta["path"])
       info[:date] =
         if info[:name] =~ /(\d\d)(\d\d)(\d\d)/
-          Date $3.to_i + 2000, $1.to_i, $2.to_i
+          Date.new $3.to_i + 2000, $1.to_i, $2.to_i
         end
       info[:url] = client.shares(meta["path"]).fetch("url")
       info
