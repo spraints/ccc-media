@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206031401) do
+ActiveRecord::Schema.define(version: 20151207035605) do
+
+  create_table "dropbox_files", force: :cascade do |t|
+    t.string   "category"
+    t.string   "path"
+    t.string   "date"
+    t.string   "public_url"
+    t.datetime "public_url_expires_at"
+    t.integer  "owner_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "dropbox_users", force: :cascade do |t|
     t.string   "uid"
