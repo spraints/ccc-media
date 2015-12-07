@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  # todo - ensure matt's logged in
+  before_action :ensure_admin
 
   def create
     user = DropboxUser.for_uid!(params[:uid].to_s)

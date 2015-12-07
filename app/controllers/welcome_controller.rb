@@ -1,12 +1,17 @@
 class WelcomeController < ApplicationController
   def index
     @users =
-      if session[:db_uid].to_s == "10974355"
+      if admin?
         DropboxUser.all
       else
         []
       end
-    @bulletins = DropboxFile.in_category("bulletin")
+    @bulletins =
+      if admin?
+        DropboxFile.in_category("bulletin")
+      else
+        []
+      end
   end
 
   def reset
