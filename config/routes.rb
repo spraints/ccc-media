@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post "dropbox/scans" => "welcome#scan"
   post "dropbox/urls" => "welcome#update_urls"
 
+  put "users/:uid/:setting" => "settings#create"
+  delete "users/:uid/:setting" => "settings#destroy"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

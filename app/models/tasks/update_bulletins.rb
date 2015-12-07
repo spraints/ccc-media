@@ -2,6 +2,7 @@ module Tasks
   class UpdateBulletins
     def perform(uid)
       user = DropboxUser.for_uid!(uid)
+      return unless user.sync_enabled?
       bulletins = Tasks::ListBulletins.new.perform(uid)
       bulletins.each do |info|
         file = user.files.in_category("bulletin").at_path(info[:path])

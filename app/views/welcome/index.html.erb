@@ -9,6 +9,9 @@
 
     <div><% @users.each do |user| %>
       <div><%= user.uid %> <%= user.email %>
+        <%= form_tag "/users/#{user.uid}/sync_enabled", :method => (user.sync_enabled? ? :delete : :put) do %>
+          <input type="submit" value="<%= user.sync_enabled? ? "disable" : "enable" %>">
+        <% end %>
         <%= form_tag "/dropbox/scans" do %>
           <input type="hidden" name="uid" value="<%= user.uid %>">
           <input type="checkbox" name="background">
