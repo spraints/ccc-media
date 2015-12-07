@@ -6,8 +6,14 @@ module Dropbox
 
     def receive
       Rails.logger.info "X-Dropbox-Signature: #{request.headers["X-Dropbox-Signature"]}"
-      Rails.logger.info request.body.read
-      # todo - look for new bulletins
+      json = request.body.read
+      Rails.logger.info json
+
+      payload = JSON.load json
+      payload["delta"]["users"].each do |uid|
+        Tasks::BackgroundTask.new(Tasks::UpdateBulletins.new).perform(uid.to_s)
+      end
+
       render :text => "ok\n"
     end
   end

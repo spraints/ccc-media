@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root "welcome#index"
-  get "auth/:provider/callback" => "welcome#callback"
+  get "auth/:provider/callback" => "welcome#auth_callback"
   get "reset" => "welcome#reset"
 
   get "dropbox/event" => "dropbox/webhooks#verify"
   post "dropbox/event" => "dropbox/webhooks#receive"
 
-  get "dropbox/scan/:uid" => "welcome#temp_scan", :as => :scan
+  post "dropbox/scans" => "welcome#scan"
+  post "dropbox/urls" => "welcome#update_urls"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

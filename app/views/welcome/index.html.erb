@@ -8,7 +8,22 @@
     <a href="/reset">reset</a><br/>
 
     <div><% @users.each do |user| %>
-      <div><%= user.uid %> <%= user.email %> <%= link_to "scan", scan_path(user.uid) %></div>
+      <div><%= user.uid %> <%= user.email %>
+        <%= form_tag "/dropbox/scans" do %>
+          <input type="hidden" name="uid" value="<%= user.uid %>">
+          <input type="checkbox" name="background">
+          <input type="submit" value="scan">
+        <% end %>
+        <%= form_tag "/dropbox/urls" do %>
+          <input type="hidden" name="uid" value="<%= user.uid %>">
+          <input type="checkbox" name="background">
+          <input type="submit" value="update urls">
+        <% end %>
+      </div>
+    <% end %></div>
+
+    <div><% @bulletins.each do |bulletin| %>
+      <div><%= debug bulletin %></div>
     <% end %></div>
 
     <%= debug session.to_hash %>
