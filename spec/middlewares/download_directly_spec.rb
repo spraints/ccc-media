@@ -3,7 +3,7 @@ require "rack/test"
 
 require_relative "../../app/middlewares/download_directly"
 
-describe DownloadDirectly do
+describe DownloadDirectly, :vcr do
   include Rack::Test::Methods
 
   let(:app) { described_class.new(inner_app) }
@@ -24,8 +24,9 @@ describe DownloadDirectly do
 
     it "resolves the URL" do
       get "/anything"
-      expect(last_response.status).to eq(302)
-      expect(last_response["Location"]).to eq("RESOLVED URL")
+      expect(last_response.status).to eq(200)
+      expect(last_response["Location"]).to be_nil
+      expect(last_response.body.size).to eq(203975)
     end
   end
 end

@@ -37,6 +37,8 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'dotenv-rails'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
