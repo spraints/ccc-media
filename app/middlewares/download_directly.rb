@@ -25,6 +25,8 @@ class DownloadDirectly
   private
 
   def get_response(uri)
-    Net::HTTP.get_response(uri)
+    Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == "https") do |http|
+      return http.request_get(uri)
+    end
   end
 end
