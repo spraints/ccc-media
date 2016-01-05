@@ -26,7 +26,7 @@ describe DownloadDirectly, :vcr do
       get "/anything"
       expect(last_response.status).to eq(200)
       expect(last_response["Location"]).to be_nil
-      expect(last_response.body.size).to eq(203975)
+      expect(last_response.body.size).to eq(88184)
     end
   end
 end
