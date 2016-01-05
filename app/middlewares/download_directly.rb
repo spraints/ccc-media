@@ -11,7 +11,7 @@ class DownloadDirectly
       until location.nil? || seen[location]
         seen[location] = true
         uri = URI(location)
-        response = Net::HTTP.get_response(uri)
+        response = get_response(uri)
         if response.is_a?(Net::HTTPRedirection)
           location = response["Location"]
         else
@@ -20,5 +20,11 @@ class DownloadDirectly
       end
     end
     result
+  end
+
+  private
+
+  def get_response(uri)
+    Net::HTTP.get_response(uri)
   end
 end
