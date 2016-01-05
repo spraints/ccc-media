@@ -26,6 +26,8 @@ describe DownloadDirectly, :vcr do
       get "/anything"
       expect(last_response.status).to eq(200)
       expect(last_response["Location"]).to be_nil
+      expect(last_response["Content-Disposition"]).to eq("inline; filename=\"bulletin 010316 pdf.pdf\"; filename*=UTF-8''bulletin%20010316%20pdf.pdf")
+      expect(last_response["Content-Type"]).to eq("application/pdf")
       expect(last_response.body.size).to eq(88184)
     end
   end

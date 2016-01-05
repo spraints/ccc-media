@@ -15,7 +15,11 @@ class DownloadDirectly
         if response.is_a?(Net::HTTPRedirection)
           location = response["Location"]
         else
-          return [200, {"Content-Type" => response["Content-Type"]}, [response.body]]
+          headers = {
+            "Content-Type" => response["Content-Type"],
+            "Content-Disposition" => response["Content-Disposition"],
+          }
+          return [200, headers, [response.body]]
         end
       end
     end
