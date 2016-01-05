@@ -1,0 +1,5 @@
+#!/bin/sh
+
+script/bootstrap --quiet
+
+exec bin/foreman start
