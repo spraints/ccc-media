@@ -23,8 +23,8 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'dropbox-sdk', :require => 'dropbox_sdk'
-gem 'omniauth-dropbox-oauth2'
+gem 'dropbox_api'
+gem 'omniauth-dropbox-oauth2', git: 'https://github.com/bamorim/omniauth-dropbox-oauth2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -37,6 +37,9 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'dotenv-rails'
+end
+
+group :test do
   gem 'vcr'
   gem 'webmock'
 end
