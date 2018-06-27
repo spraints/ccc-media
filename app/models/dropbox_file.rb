@@ -3,7 +3,7 @@ class DropboxFile < ActiveRecord::Base
 
   scope :for_list, -> { order("date desc").limit(20) }
   scope :in_category, ->(category) { where(:category => category) }
-  scope :expired, -> { where("public_url_expires_at IS NULL OR public_url_expires_at < ?", Time.now) }
+  scope :expired, -> { where("public_url IS NULL OR (public_url_expires_at IS NOT NULL AND public_url_expires_at < ?)", Time.now) }
 
   def self.at_path(path)
     where(:path => path).first_or_initialize
