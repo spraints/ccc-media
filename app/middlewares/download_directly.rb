@@ -1,4 +1,5 @@
 require "net/http"
+require "net/https"
 
 # Peel off the redirects
 class DownloadDirectly
@@ -13,6 +14,7 @@ class DownloadDirectly
       until location.nil? || seen[location]
         seen[location] = true
         uri = URI(location)
+        p uri
         response = get_response(uri)
         if response.is_a?(Net::HTTPRedirection)
           location = response["Location"]
