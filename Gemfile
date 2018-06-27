@@ -25,6 +25,7 @@ gem 'puma'
 
 gem 'dropbox_api'
 gem 'omniauth-dropbox-oauth2', git: 'https://github.com/bamorim/omniauth-dropbox-oauth2'
+# TODO - just use dropbox_api (http://www.xuuso.com/dropbox_api/file.rails_setup.html)
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
