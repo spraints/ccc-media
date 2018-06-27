@@ -22,6 +22,21 @@
 <% end %></div>
 
 <h3>Known files</h3>
-<div><% @files.each do |file| %>
-  <div><%= debug file %></div>
-<% end %></div>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Date</th>
+    <th>Expiration</th>
+    <th>Path</th>
+    <th></th>
+  </tr>
+  <% @files.each do |file| %>
+    <tr>
+      <td><%= file.category %></td>
+      <td><%= file.date %></td>
+      <td><%= file.public_url_expires_at %></td>
+      <td><%= file.path %></td>
+      <td><%= link_to "direct", file.public_url %></td>
+    </tr>
+  <% end %>
+</table>
