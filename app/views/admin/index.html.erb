@@ -1,23 +1,42 @@
 <% page_title "Admin" %>
 
 <div><% @users.each do |user| %>
-  <div><%= user.uid %> <%= user.email %>
+  <div>Sync is <%= user.sync_enabled? ? "enabled" : "disabled" %> for <%= user.email %>'s files.
     <%= form_tag "/admin/users/#{user.uid}/sync_enabled", :method => (user.sync_enabled? ? :delete : :put) do %>
       <input type="submit" value="<%= user.sync_enabled? ? "disable" : "enable" %>">
     <% end %>
+    <br>
     <%= form_tag "/admin/scan" do %>
       <input type="hidden" name="uid" value="<%= user.uid %>">
-      <input type="checkbox" name="background">
-      <input type="submit" value="scan">
+      <input type="checkbox" name="background"> <label for="background">run as background job</label><br>
+      <input type="submit" value="scan for bulletins">
     <% end %>
+    <br>
     <%= form_tag "/admin/urls" do %>
       <input type="hidden" name="uid" value="<%= user.uid %>">
-      <input type="checkbox" name="background">
-      <input type="submit" value="update urls">
+      <input type="checkbox" name="background"> <label for="background">run as background job</label><br>
+      <input type="submit" value="freshen urls for bulletins">
     <% end %>
   </div>
+  <hr>
 <% end %></div>
 
-<div><% @files.each do |file| %>
-  <div><%= debug file %></div>
-<% end %></div>
+<h3>Known files</h3>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Date</th>
+    <th>Expiration</th>
+    <th>Path</th>
+    <th></th>
+  </tr>
+  <% @files.each do |file| %>
+    <tr>
+      <td><%= file.category %></td>
+      <td><%= file.date %></td>
+      <td><%= file.public_url_expires_at %></td>
+      <td><%= file.path %></td>
+      <td><%= file.public_url && link_to("direct", file.public_url) %></td>
+    </tr>
+  <% end %>
+</table>

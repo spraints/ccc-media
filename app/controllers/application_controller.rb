@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def admin?
-    session[:db_uid].to_s == ENV["ADMIN_UID"]
+    session[:db_email].to_s == ENV["ADMIN_EMAIL"]
   end
 
   def ensure_admin

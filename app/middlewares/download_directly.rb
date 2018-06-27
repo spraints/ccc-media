@@ -1,3 +1,6 @@
+require "net/http"
+require "net/https"
+
 # Peel off the redirects
 class DownloadDirectly
   def initialize(app)
@@ -11,9 +14,10 @@ class DownloadDirectly
       until location.nil? || seen[location]
         seen[location] = true
         uri = URI(location)
+        p uri
         response = get_response(uri)
         if response.is_a?(Net::HTTPRedirection)
-          location = response["Location"]
+          location = (uri + response["Location"]).to_s
         else
           headers = {
             "Content-Type" => response["Content-Type"],

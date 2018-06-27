@@ -3,7 +3,7 @@ class AdminController < ApplicationController
 
   def index
     @users = DropboxUser.all
-    @files = DropboxFile.all
+    @files = DropboxFile.for_list
   end
 
   def scan
