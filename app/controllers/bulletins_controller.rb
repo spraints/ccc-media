@@ -1,6 +1,6 @@
 class BulletinsController < ApplicationController
   def index
-    @bulletins = DropboxFile.in_category("bulletin")
+    @bulletins = DropboxFile.in_category("bulletin").for_list
   end
 
   def show
