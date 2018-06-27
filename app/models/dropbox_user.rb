@@ -12,6 +12,6 @@ class DropboxUser < ActiveRecord::Base
   end
 
   def dropbox_client
-    DropboxClient.new(token)
+    DropboxApi::Client.new(token)
   end
 end

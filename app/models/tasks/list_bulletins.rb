@@ -6,20 +6,23 @@ module Tasks
     end
 
     def find_bulletins(client, path, result = [])
-      client.metadata(path).fetch("contents").each do |meta|
-        if meta["is_dir"]
-          find_bulletins(client, meta["path"], result)
-        elsif File.basename(meta["path"]) =~ /^bulletin/
-          result.push info(client, meta)
+      client.list_folder(path).entries.each do |entry|
+        case entry
+        when DropboxApi::Metadata::Folder
+          find_bulletins(client, entry.path_lower, result)
+        when DropboxApi::Metadata::File
+          if entry.name =~ /^bulletin/i
+            result.push info(client, entry)
+          end
         end
       end
       result
     end
 
-    def info(client, meta)
+    def info(client, file)
       info = {}
-      info[:path] = meta["path"]
-      info[:name] = File.basename(meta["path"])
+      info[:path] = file.path_display
+      info[:name] = file.name
       info[:date] =
         if info[:name] =~ /(\d\d)(\d\d)(\d\d)/
           Date.new $3.to_i + 2000, $1.to_i, $2.to_i
