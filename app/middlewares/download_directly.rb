@@ -17,7 +17,7 @@ class DownloadDirectly
         p uri
         response = get_response(uri)
         if response.is_a?(Net::HTTPRedirection)
-          location = response["Location"]
+          location = (uri + response["Location"]).to_s
         else
           headers = {
             "Content-Type" => response["Content-Type"],
