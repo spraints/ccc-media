@@ -1,3 +1,5 @@
+require "net/http"
+
 # Peel off the redirects
 class DownloadDirectly
   def initialize(app)
