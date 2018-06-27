@@ -36,7 +36,7 @@
       <td><%= file.date %></td>
       <td><%= file.public_url_expires_at %></td>
       <td><%= file.path %></td>
-      <td><%= link_to "direct", file.public_url %></td>
+      <td><%= file.public_url && link_to("direct", file.public_url) %></td>
     </tr>
   <% end %>
 </table>
