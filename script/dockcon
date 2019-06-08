@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+docker build --rm \
+  --tag ccc-media-dev \
+  --build-arg RUBY_VERSION="$(cat .rbenv-version)"  \
+  --build-arg UID=$(id -u) \
+  config/tools/devimage
+
+set -x
+exec docker run -it --rm \
+  -v $(pwd):/work \
+  -w /work \
+  -u $(id -u) \
+  ccc-media-dev \
+  /bin/bash -l
