@@ -9,7 +9,9 @@ docker build --rm \
   config/tools/devimage
 
 set -x
+# Inside the container, do 'bundle exec rails server -b 0.0.0.0'
 exec docker run -it --rm \
+  -p 3344:3000 \
   -v $(pwd):/work \
   -w /work \
   -u $(id -u) \
