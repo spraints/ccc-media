@@ -10,7 +10,7 @@ module Dropbox
       Rails.logger.info json
 
       payload = JSON.load json
-      payload["delta"]["users"].each do |uid|
+      payload["list_folder"]["accounts"].each do |uid|
         Tasks::BackgroundTask.new(Tasks::UpdateBulletins.new).perform(uid.to_s)
       end
 
