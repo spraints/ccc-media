@@ -23,6 +23,8 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'useragent'
+
 gem 'dropbox_api'
 gem 'omniauth-dropbox-oauth2', git: 'https://github.com/bamorim/omniauth-dropbox-oauth2'
 # TODO - just use dropbox_api (http://www.xuuso.com/dropbox_api/file.rails_setup.html)

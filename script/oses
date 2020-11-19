@@ -1,0 +1,27 @@
+#!/bin/bash
+
+main() {
+  raw_logs | filter
+}
+
+filter() {
+  #grep os= | sed -e 's/ app.*\(path=".*?"\).*\(os=".*?"\).*/ \1 \2/'
+  grep os= | sed -e 's/ app.*\(path="[^"]*"\).*\(os="[^"]*"\).*/ \1 \2/'
+}
+
+raw_logs() {
+  if [ -z "${DEMO}" ]; then
+    heroku logs --source=app --num 999
+  else
+    cat <<DEMO
+2020-11-19T14:03:03.983551+00:00 app[web.1]: DropboxUser Load (1.2ms)  SELECT "dropbox_users".* FROM "dropbox_users"
+2020-11-19T14:03:04.002094+00:00 app[web.1]: DropboxFile Load (2.0ms)  SELECT  "dropbox_files".* FROM "dropbox_files"  ORDER BY date desc LIMIT 20
+2020-11-19T14:03:04.041240+00:00 app[web.1]: Rendered admin/index.html.erb within layouts/application (61.1ms)
+2020-11-19T14:03:04.042916+00:00 app[web.1]: Completed 200 OK in 81ms (Views: 58.9ms | ActiveRecord: 10.0ms)
+2020-11-19T14:03:04.044479+00:00 app[web.1]: method="GET" path="/admin" duration=0.1260 os="OS X 10.15.7" user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15"
+2020-11-19T14:03:04.046269+00:00 heroku[router]: at=info method=GET path="/admin" host=db.frankfortccc.com request_id=1c52166a-297c-4207-bccd-ab685af17e33 fwd="38.65.248.63" dyno=web.1 connect=0ms service=130ms status=200 bytes=10003 protocol=https
+DEMO
+  fi
+}
+
+main
