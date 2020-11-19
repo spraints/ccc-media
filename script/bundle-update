@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+mkdir -p vendor/cache
+docker-compose build web
+docker-compose run --rm -T web tar cf - Gemfile.lock vendor/cache | tar xf -
