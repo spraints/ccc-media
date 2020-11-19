@@ -18,6 +18,3 @@
 /log/*
 !/log/.keep
 /tmp
-
-# In dev, I copy this around so that I don't have to download as much when rebuilding the image.
-/vendor/cache

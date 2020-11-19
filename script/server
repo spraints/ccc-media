@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
+script/bootstrap --quiet
 
-mkdir -p vendor/cache
-docker-compose build web
-exec docker-compose up
+exec bin/foreman start
