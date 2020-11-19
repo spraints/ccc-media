@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+step() {
+  echo "======> $*"
+}
+
+step Ruby dependencies
+bundle check >/dev/null 2>&1 || bundle install --path .bundle
+
+step Node dependencies
+npm install
