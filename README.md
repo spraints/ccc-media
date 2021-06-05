@@ -1,27 +1,17 @@
-# Auto-sync sermon notes to the website
+# Archived
 
-Ideally, this will work like this:
+To start this back up again:
 
-1. Get a callback from Dropbox when new files are added.
-2. ~~When there's a new `bulletin*` file, upload it to the clover site.~~ All Dropbox files have a sharable URL.
-3. Update a thing on the clover site to point to the new file.
+1. Deploy this to heroku, set up a custom domain (e.g. db.frankfortccc.com), and set it up with a plan that allows https.
+1. Ensure `DROPBOX_KEY` and `DROPBOX_SECRET` are correct in `heroku config`. Create or modify an app in the [Dropbox app console](https://www.dropbox.com/developers/apps).
+1. Log in to https://db.frankfortccc.com/admin and ensure sync is enabled for the right account. If you haven't logged into the app before, you might need to create a record in the `dropbox_users` table first.
+1. I don't remember how to set up webhooks. There might be a step here you need to complete.
+1. Paste a snippet like the one below into a webpage:
 
-Here's the directory where the bulletin would show up:
+```html
+<p>You can view the <a href="http://db.frankfortccc.com/bulletins/current">sermon notes</a> for the current sermon here.</p>
+```
 
-    $ ls ~/Dropbox/Misc/Tim\'s\ Sermon\ Materials/
-    Blessed to Be a Blessing 112215 16x9 .pptx      bulletin 092015 pdf.pdf
-    Blessed to Be a Blessing 112215 4x3 ppt.pptx    bulletin 111515 pdf.pdf
-    Blessed to Share Christ 112915 16x9 ppt.pptx    bulletin 112215 pdf.pdf
-    Blessed to Share Christ 112915 4x3 ppt.pptx     bulletin 112915 pdf.pdf
+# CCC-Media
 
-Since Clover doesn't have an API, and since Dropbox can hit webhooks, I think I'll set up a web app with these endpoints:
-
-* admin, for setting up the Dropbox integration
-* dropbox webhook, for receiving information about new files
-* landing pages from clover
-  * current bulletin
-  * old bulletins
-  * current sermon
-  * old sermons
-
-If I do the sermon stuff, there will need to be a thing that parses clover's list of sermons.
+This app ran https://db.frankfortccc.com/. It watches a shared folder in Dropbox for new files that are named a certain way. All matched files are served from this app with a permalink. This app doesn't archive the files, though, so if they get removed from Dropbox they become unavailable. The most recent file is available at `/bulletins/current`. This is a low-friction way for church staff to update the current bulletin on the church website.
