@@ -12,6 +12,20 @@ To start this back up again:
 <p>You can view the <a href="http://db.frankfortccc.com/bulletins/current">sermon notes</a> for the current sermon here.</p>
 ```
 
+## Heroku setup
+
+These steps should at least get you close to a working app on heroku:
+
+```
+$ heroku apps:create
+$ git push heroku master
+$ heroku config:add DROPBOX_KEY=...
+$ heroku config:add DROPBOX_SECRET=...
+$ heroku domains:add db.frankfortccc.com
+$ heroku certs:auto:enable
+$ heroku run bundle exec rake db:migrate
+```
+
 # CCC-Media
 
 This app ran https://db.frankfortccc.com/. It watches a shared folder in Dropbox for new files that are named a certain way. All matched files are served from this app with a permalink. This app doesn't archive the files, though, so if they get removed from Dropbox they become unavailable. The most recent file is available at `/bulletins/current`. This is a low-friction way for church staff to update the current bulletin on the church website.
